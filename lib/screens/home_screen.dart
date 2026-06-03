@@ -16,6 +16,8 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedDay = ref.watch(selectedDayProvider);
     final xp = ref.watch(xpProvider);
+    final rank = getRank(xp);
+    final title = getTitle(xp);
     final workoutAsync = ref.watch(workoutPlanProvider);
 
     return Scaffold(
@@ -38,20 +40,21 @@ class HomeScreen extends ConsumerWidget {
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         children: [
-                          const Text(
-                            'LEVEL 1',
-                            style: TextStyle(
-                              fontSize: 20,
+                          Text(
+                            'RANK: $rank',
+                            style: const TextStyle(
+                              fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
 
                           const SizedBox(height: 8),
 
-                          Text(
-                            'XP: $xp / 100',
-                            style: const TextStyle(fontSize: 16),
-                          ),
+                          Text(title, style: const TextStyle(fontSize: 18)),
+
+                          const SizedBox(height: 12),
+
+                          Text('XP: $xp', style: const TextStyle(fontSize: 16)),
                         ],
                       ),
                     ),
