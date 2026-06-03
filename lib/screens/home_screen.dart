@@ -7,12 +7,15 @@ import '../providers/workout_provider.dart';
 import 'block_details_screen.dart';
 import 'workout_session_screen.dart';
 
+import '../providers/xp_provider.dart';
+
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedDay = ref.watch(selectedDayProvider);
+    final xp = ref.watch(xpProvider);
     final workoutAsync = ref.watch(workoutPlanProvider);
 
     return Scaffold(
@@ -30,6 +33,32 @@ class HomeScreen extends ConsumerWidget {
               padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          const Text(
+                            'LEVEL 1',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+
+                          const SizedBox(height: 8),
+
+                          Text(
+                            'XP: $xp / 100',
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
                   // DAY SELECTOR
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
