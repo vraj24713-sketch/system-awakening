@@ -1,0 +1,286 @@
+{
+  "week": [
+    {
+      "day": 1,
+      "title": "Push & Iron Hand",
+      "theme": "Karate, Baki",
+      "blocks": [
+        {
+          "name": "Warm‑up & Makiwara Prep",
+          "duration_seconds": 600,
+          "type": "warmup",
+          "exercises": [
+            { "type": "timed", "name": "Jump rope / high knees", "duration": 120 },
+            { "type": "instruction", "name": "Dynamic stretches", "notes": "arm circles, shoulder dislocates with towel, torso twists, leg swings", "duration": 180 },
+            { "type": "reps", "name": "Palm & knuckle taps", "reps": 20, "notes": "lightly slap padded wall with palms 20x, then knuckle taps 20x, breathe out sharply" }
+          ]
+        },
+        {
+          "name": "Strength & Hand Conditioning",
+          "duration_seconds": 1800,
+          "type": "strength",
+          "exercises": [
+            { "type": "reps_sets", "name": "Knuckle Push‑ups", "sets": 4, "reps": "10-15", "notes": "on mat/carpet, start on knees if needed" },
+            { "type": "reps_sets", "name": "Diamond Push‑ups", "sets": 3, "reps": "8-12" },
+            { "type": "reps_sets", "name": "Chair Dips", "sets": 3, "reps": "AMRAP (aim 15)", "notes": "feet on floor, elbows back" },
+            { "type": "reps_sets", "name": "Pike Push‑ups", "sets": 3, "reps": "8-10", "notes": "hips high, head to floor" },
+            { "type": "rounds", "name": "Wall Iron Palm/Knuckle Strike Drill", "rounds": 3, "details": "30 light palm heel taps → 10 moderate knuckle punches with 2‑sec freeze" },
+            { "type": "reps_sets", "name": "Fingertip Push‑ups", "sets": 2, "reps": "5 very slow", "notes": "on knees, all 5 fingers" }
+          ]
+        },
+        {
+          "name": "Fight Conditioning",
+          "duration_seconds": 900,
+          "type": "conditioning",
+          "exercises": [
+            { "type": "timed", "name": "Karate Kihon Kata Flow (Heian Shodan)", "duration": 300, "notes": "front stance: low block, lunge punch, turn, repeat – sharp exhale, hip vibration" },
+            { "type": "reps_sets", "name": "Plank Shoulder Taps", "sets": 3, "reps": 30, "notes": "total taps" }
+          ]
+        },
+        {
+          "name": "Cool‑down",
+          "duration_seconds": 300,
+          "type": "cooldown",
+          "exercises": [
+            { "type": "instruction", "name": "Wrist & shoulder stretches", "duration": 120 },
+            { "type": "instruction", "name": "Deep breathing", "duration": 60 }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "title": "Pull & Immovable Grip",
+      "theme": "Baki, Jujutsu",
+      "blocks": [
+        {
+          "name": "Warm‑up",
+          "duration_seconds": 600,
+          "type": "warmup",
+          "exercises": [
+            { "type": "timed", "name": "Jump rope", "duration": 120 },
+            { "type": "instruction", "name": "Dynamic stretches", "notes": "arm circles, band pull‑aparts 30 reps, torso rotations", "duration": 180 },
+            { "type": "instruction", "name": "Jujutsu wrist spirals with towel", "notes": "hold towel, twist and spiral as if applying ikkyo/nikyo, 2 min slow", "duration": 120 }
+          ]
+        },
+        {
+          "name": "Strength Block",
+          "duration_seconds": 1800,
+          "type": "strength",
+          "exercises": [
+            { "type": "reps_sets", "name": "Pull‑ups (overhand)", "sets": 4, "reps": "AMRAP", "notes": "slow negatives if needed" },
+            { "type": "reps_sets", "name": "Towel Pull‑ups", "sets": 3, "reps": "AMRAP", "notes": "throw towel over bar, grip ends" },
+            { "type": "reps_sets", "name": "Doorframe/Table Rows", "sets": 3, "reps": 12 },
+            { "type": "reps_sets", "name": "Band Face Pulls", "sets": 3, "reps": 20, "notes": "anchor at face height" },
+            { "type": "timed", "name": "Superman Holds", "duration": 30, "sets": 3 },
+            { "type": "reps_sets", "name": "Neck Bridges (front & back)", "sets": 3, "reps": 10, "notes": "start with support" },
+            { "type": "timed", "name": "Dead Hang", "duration": 60, "sets": 3, "notes": "grip, spine decompression" }
+          ]
+        },
+        {
+          "name": "Fight Conditioning",
+          "duration_seconds": 900,
+          "type": "conditioning",
+          "exercises": [
+            { "type": "timed", "name": "Jujutsu Off‑Balancing with Chair", "duration": 300, "notes": "grip chair back, push/pull 8 directions, imagine kuzushi" },
+            { "type": "rounds", "name": "Towel Farmer's Carry", "rounds": 3, "details": "45 sec carry, backpack loaded, perfect posture" }
+          ]
+        },
+        {
+          "name": "Cool‑down",
+          "duration_seconds": 300,
+          "type": "cooldown",
+          "exercises": [
+            { "type": "instruction", "name": "Hang stretches, wrist flexor stretch, shoulder opener", "duration": 180 }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "title": "Legs, Breakfalls & Kicking",
+      "theme": "Kudo, Karate",
+      "blocks": [
+        {
+          "name": "Warm‑up & Ukemi",
+          "duration_seconds": 600,
+          "type": "warmup",
+          "exercises": [
+            { "type": "timed", "name": "High knees", "duration": 120 },
+            { "type": "instruction", "name": "Leg swings & hip circles", "duration": 120 },
+            { "type": "instruction", "name": "Kudo Ukemi (Breakfalls)", "notes": "back breakfall x10, side breakfall x10 each, forward roll x10", "duration": 300 }
+          ]
+        },
+        {
+          "name": "Strength & Explosive",
+          "duration_seconds": 1800,
+          "type": "strength",
+          "exercises": [
+            { "type": "reps_sets", "name": "Bodyweight Squats", "sets": 4, "reps": 25, "notes": "explosive up" },
+            { "type": "reps_sets", "name": "Bulgarian Split Squats", "sets": 3, "reps": 10, "notes": "per leg, back foot on chair" },
+            { "type": "reps_sets", "name": "Single‑Leg Glute Bridges", "sets": 3, "reps": 15, "notes": "per side" },
+            { "type": "reps_sets", "name": "Box Jumps / Broad Jumps", "sets": 3, "reps": 6 },
+            { "type": "reps_sets", "name": "Calf Raises", "sets": 4, "reps": 30 }
+          ]
+        },
+        {
+          "name": "Fight Conditioning",
+          "duration_seconds": 900,
+          "type": "conditioning",
+          "exercises": [
+            { "type": "reps", "name": "Karate Kicks – Technical Repetition", "reps": 20, "notes": "front kick, roundhouse, side kick each leg" },
+            { "type": "rounds", "name": "Kudo Entry Drill (Jab → Low Kick → Backstep)", "rounds": 3, "details": "10 each side" },
+            { "type": "timed", "name": "Footwork Agility", "duration": 300, "notes": "tape a line, forward/back/lateral shuffles, pivots" }
+          ]
+        },
+        {
+          "name": "Cool‑down",
+          "duration_seconds": 300,
+          "type": "cooldown",
+          "exercises": [
+            { "type": "instruction", "name": "Hamstring, hip flexor, quad stretches", "duration": 120 },
+            { "type": "timed", "name": "Deep squat hold", "duration": 60 }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 4,
+      "title": "Striking Flow & Reactive Core",
+      "theme": "Karate, Aikido, Jujutsu",
+      "blocks": [
+        {
+          "name": "Warm‑up & Footwork",
+          "duration_seconds": 600,
+          "type": "warmup",
+          "exercises": [
+            { "type": "timed", "name": "Jump rope", "duration": 180 },
+            { "type": "instruction", "name": "Aikido Tenkan & Irimi Footwork", "notes": "tenkan: step out and pivot 180°, irimi: slide forward, 10 reps each side", "duration": 300 },
+            { "type": "instruction", "name": "Jujutsu Towel Wrist Spirals", "duration": 120 }
+          ]
+        },
+        {
+          "name": "Strength/Skill Block",
+          "duration_seconds": 1800,
+          "type": "strength",
+          "exercises": [
+            { "type": "timed", "name": "Shadowboxing – Baki Imagination Sparring Round 1", "duration": 180, "notes": "against an aggressive boxer" },
+            { "type": "instruction", "name": "Karate Kihon Combo Practice", "notes": "jab‑cross‑front kick, reverse punch‑back fist‑roundhouse, 30 each", "duration": 300 },
+            { "type": "timed", "name": "Systema Breathing Flow", "duration": 300, "notes": "slow continuous movement, strike, roll, twist" },
+            { "type": "rounds", "name": "Wall Slap Drill (Baki/Aikido whip)", "rounds": 3, "details": "20 each hand loose whip" }
+          ]
+        },
+        {
+          "name": "Fight Conditioning – Reactive Core",
+          "duration_seconds": 900,
+          "type": "conditioning",
+          "exercises": [
+            { "type": "reps", "name": "Lying Leg Raises", "reps": 15 },
+            { "type": "reps", "name": "Russian Twists with book", "reps": 20 },
+            { "type": "timed", "name": "Bicycle Crunches", "duration": 30 },
+            { "type": "reps", "name": "Plank to Downward Dog", "reps": 10 },
+            { "type": "instruction", "name": "Aikido Kokyu Ho (Breath Power)", "notes": "5 slow deep exhale pushes, whole‑body connection", "duration": 120 }
+          ]
+        },
+        {
+          "name": "Cool‑down",
+          "duration_seconds": 300,
+          "type": "cooldown",
+          "exercises": [
+            { "type": "instruction", "name": "Side bends, seated spinal twist, wrist circles", "duration": 180 }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 5,
+      "title": "Full‑Body War Circuit & Animal Agility",
+      "theme": "Baki, Lookism",
+      "blocks": [
+        {
+          "name": "Warm‑up",
+          "duration_seconds": 600,
+          "type": "warmup",
+          "exercises": [
+            { "type": "timed", "name": "Jump rope", "duration": 120 },
+            { "type": "timed", "name": "High knees", "duration": 60 },
+            { "type": "timed", "name": "Bear crawl forward/backward", "duration": 120 },
+            { "type": "instruction", "name": "Dynamic lunges, torso rotations", "duration": 180 }
+          ]
+        },
+        {
+          "name": "The “Hanma” Circuit (repeat 3x)",
+          "duration_seconds": 1800,
+          "type": "strength",
+          "exercises": [
+            { "type": "circuit", "name": "Circuit (rest 2 min between rounds)", "exercises_in_circuit": [
+              { "type": "reps", "name": "Push‑ups", "reps": 20 },
+              { "type": "reps", "name": "Squats", "reps": 20 },
+              { "type": "reps", "name": "Pull‑ups or Inverted Rows", "reps": 10 },
+              { "type": "reps", "name": "Walking Lunges (total)", "reps": 20 },
+              { "type": "reps", "name": "Burpees", "reps": 10 },
+              { "type": "timed", "name": "Plank", "duration": 30 }
+            ]}
+          ]
+        },
+        {
+          "name": "Animal Flow & Flow State",
+          "duration_seconds": 900,
+          "type": "conditioning",
+          "exercises": [
+            { "type": "timed", "name": "Bear Crawl", "duration": 30, "notes": "forward & back" },
+            { "type": "timed", "name": "Crab Walk", "duration": 30 },
+            { "type": "timed", "name": "Lateral Ape Walk", "duration": 30 },
+            { "type": "timed", "name": "Freeform “Lookism Flow”", "duration": 300, "notes": "crawling, rolling, low ducks, shadow kicks" }
+          ]
+        },
+        {
+          "name": "Cool‑down",
+          "duration_seconds": 300,
+          "type": "cooldown",
+          "exercises": [
+            { "type": "instruction", "name": "Full‑body stretch, deep breathing", "duration": 300 }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 6,
+      "title": "The Sword & the Shadow: Mixed Martial Flow",
+      "theme": "Aikido, Kudo, Jujutsu, Karate",
+      "blocks": [
+        {
+          "name": "Warm‑up & Jo Suburi",
+          "duration_seconds": 600,
+          "type": "warmup",
+          "exercises": [
+            { "type": "timed", "name": "Jump rope", "duration": 120 },
+            { "type": "instruction", "name": "Aikido Jo Suburi with broomstick", "notes": "basic 5 strikes and blocks, let stick teach hips", "duration": 300 }
+          ]
+        },
+        {
+          "name": "Mixed Martial Flow – 6 Rounds",
+          "duration_seconds": 1800,
+          "type": "strength",
+          "exercises": [
+            { "type": "timed", "name": "Round 1: Aikido Jo Flow", "duration": 300, "notes": "20 suburi cuts, 10 tenkan pivots, kokyu ho" },
+            { "type": "timed", "name": "Round 2: Kudo Throw Entries & Sprawl", "duration": 300, "notes": "shadow hip throw 10 each side, sprawl 5" },
+            { "type": "timed", "name": "Round 3: Jujutsu Off‑Balancing & Lock Flow", "duration": 300, "notes": "chair break posture 10, towel wrist spirals 2 min" },
+            { "type": "timed", "name": "Round 4: Karate & Shadowboxing", "duration": 300, "notes": "2 min light dumbbell shadowbox, drop weights 3 min fast" },
+            { "type": "timed", "name": "Round 5: Slip Rope & Wall Isometrics", "duration": 300, "notes": "duck under rope 3 min, wall push isometrics 3x10 sec" },
+            { "type": "timed", "name": "Round 6: Free Flow", "duration": 300, "notes": "combine everything, move, strike, fall" }
+          ]
+        },
+        {
+          "name": "Cool‑down & Mobility",
+          "duration_seconds": 600,
+          "type": "cooldown",
+          "exercises": [
+            { "type": "instruction", "name": "Deep stretching: splits progression, shoulder dislocates, forward fold", "duration": 300 },
+            { "type": "timed", "name": "Corpse pose (savasana) with controlled breathing", "duration": 180 }
+          ]
+        }
+      ]
+    }
+  ]
+}
