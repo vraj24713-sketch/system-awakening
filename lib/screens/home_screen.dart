@@ -66,9 +66,7 @@ class HomeScreen extends ConsumerWidget {
 
                             const SizedBox(height: 8),
 
-                            LinearProgressIndicator(
-                              value: (xp / getNextRankXp(xp)).clamp(0.0, 1.0),
-                            ),
+                            LinearProgressIndicator(value: getRankProgress(xp)),
                           ] else ...[
                             const Text(
                               '⚙ SYSTEM ANALYSIS INCOMPLETE',
@@ -93,8 +91,6 @@ class HomeScreen extends ConsumerWidget {
                   ),
 
                   const SizedBox(height: 20),
-
-                  // DAY SELECTOR
 
                   // DAY SELECTOR
                   Row(

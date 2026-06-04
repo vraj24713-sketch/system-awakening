@@ -75,12 +75,40 @@ int getNextRankXp(int xp) {
   }
 }
 
+int getCurrentRankXp(int xp) {
+  final rank = getRank(xp);
+
+  switch (rank) {
+    case 'D':
+      return 50;
+    case 'C':
+      return 3000;
+    case 'B':
+      return 9000;
+    case 'A':
+      return 18000;
+    case 'S':
+      return 36500;
+    case 'S+':
+      return 73000;
+    case 'SS':
+      return 146000;
+    case 'SS+':
+      return 255500;
+    case 'SSS':
+      return 500000;
+    default:
+      return 0;
+  }
+}
+
 bool analysisUnlocked(int xp) {
   final rank = getRank(xp);
 
+  final currentRankXp = getCurrentRankXp(xp);
   final nextRankXp = getNextRankXp(xp);
 
-  final progress = xp / nextRankXp;
+  final progress = (xp - currentRankXp) / (nextRankXp - currentRankXp);
 
   if (rank == 'E') {
     return true;
@@ -91,6 +119,13 @@ bool analysisUnlocked(int xp) {
   }
 
   return progress >= 0.50;
+}
+
+double getRankProgress(int xp) {
+  final currentRankXp = getCurrentRankXp(xp);
+  final nextRankXp = getNextRankXp(xp);
+
+  return ((xp - currentRankXp) / (nextRankXp - currentRankXp)).clamp(0.0, 1.0);
 }
 
 const rankUpMessages = {
