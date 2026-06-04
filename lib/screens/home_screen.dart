@@ -55,12 +55,46 @@ class HomeScreen extends ConsumerWidget {
                           const SizedBox(height: 12),
 
                           Text('XP: $xp', style: const TextStyle(fontSize: 16)),
+
+                          const SizedBox(height: 12),
+
+                          if (analysisUnlocked(xp)) ...[
+                            Text(
+                              'Next Rank XP: ${getNextRankXp(xp)}',
+                              style: const TextStyle(fontSize: 14),
+                            ),
+
+                            const SizedBox(height: 8),
+
+                            LinearProgressIndicator(
+                              value: (xp / getNextRankXp(xp)).clamp(0.0, 1.0),
+                            ),
+                          ] else ...[
+                            const Text(
+                              '⚙ SYSTEM ANALYSIS INCOMPLETE',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+
+                            const SizedBox(height: 8),
+
+                            Text(
+                              getRank(xp) == 'S' ||
+                                      getRank(xp) == 'S+' ||
+                                      getRank(xp) == 'SS' ||
+                                      getRank(xp) == 'SS+'
+                                  ? 'Reach 90% progress to unlock rank analysis.'
+                                  : 'Reach 50% progress to unlock rank analysis.',
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ],
                       ),
                     ),
                   ),
 
                   const SizedBox(height: 20),
+
+                  // DAY SELECTOR
 
                   // DAY SELECTOR
                   Row(

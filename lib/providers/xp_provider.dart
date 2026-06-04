@@ -47,3 +47,48 @@ String getRank(int xp) {
 String getTitle(int xp) {
   return rankTitles[getRank(xp)]!;
 }
+
+int getNextRankXp(int xp) {
+  final rank = getRank(xp);
+
+  switch (rank) {
+    case 'E':
+      return 1500;
+    case 'D':
+      return 3000;
+    case 'C':
+      return 9000;
+    case 'B':
+      return 18000;
+    case 'A':
+      return 36500;
+    case 'S':
+      return 73000;
+    case 'S+':
+      return 146000;
+    case 'SS':
+      return 255500;
+    case 'SS+':
+      return 500000;
+    default:
+      return 500000;
+  }
+}
+
+bool analysisUnlocked(int xp) {
+  final rank = getRank(xp);
+
+  final nextRankXp = getNextRankXp(xp);
+
+  final progress = xp / nextRankXp;
+
+  if (rank == 'E') {
+    return true;
+  }
+
+  if (rank == 'S' || rank == 'S+' || rank == 'SS' || rank == 'SS+') {
+    return progress >= 0.90;
+  }
+
+  return progress >= 0.50;
+}
