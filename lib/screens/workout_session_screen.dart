@@ -4,16 +4,22 @@ import '../models/workout_plan.dart';
 
 import 'dart:math';
 
-class WorkoutSessionScreen extends StatefulWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../providers/xp_provider.dart';
+import '../services/save_service.dart';
+
+class WorkoutSessionScreen extends ConsumerStatefulWidget {
   final WorkoutBlock block;
 
   const WorkoutSessionScreen({super.key, required this.block});
 
   @override
-  State<WorkoutSessionScreen> createState() => _WorkoutSessionScreenState();
+  ConsumerState<WorkoutSessionScreen> createState() =>
+      _WorkoutSessionScreenState();
 }
 
-class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
+class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
   int currentExerciseIndex = 0;
 
   final messages = [
@@ -105,7 +111,13 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  final newXp = ref.read(xpProvider.notifier).state + 10;
+
+                  ref.read(xpProvider.notifier).state = newXp;
+
+                  await SaveService.saveXp(newXp);
+
                   if (currentExerciseIndex <
                       widget.block.exercises.length - 1) {
                     setState(() {
@@ -122,8 +134,12 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Workout Complete!')),
+                      const SnackBar(
+                        content: Text('🔥 Workout Complete! +10 XP'),
+                      ),
                     );
+
+                    Navigator.pop(context);
                   }
                 },
 
