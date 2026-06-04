@@ -39,7 +39,7 @@ String getRank(int xp) {
   if (xp >= 18000) return 'A';
   if (xp >= 9000) return 'B';
   if (xp >= 3000) return 'C';
-  if (xp >= 1500) return 'D';
+  if (xp >= 50) return 'D';
 
   return 'E';
 }
@@ -53,7 +53,7 @@ int getNextRankXp(int xp) {
 
   switch (rank) {
     case 'E':
-      return 1500;
+      return 50;
     case 'D':
       return 3000;
     case 'C':
@@ -91,4 +91,27 @@ bool analysisUnlocked(int xp) {
   }
 
   return progress >= 0.50;
+}
+
+const rankUpMessages = {
+  'D': '⚔️ The Hunt Begins.',
+  'C': '🔥 Discipline Has Awakened.',
+  'B': '💪 Strength Is Becoming Habit.',
+  'A': '🛡️ You Stand Above The Average.',
+  'S': '⚡ Extraordinary Power Detected.',
+  'S+': '👑 A Monarch Candidate Emerges.',
+  'SS': '🌟 Legends Speak Your Name.',
+  'SS+': '🌌 You Have Transcended Limits.',
+  'SSS': '🐺 The Shadow Monarch Has Risen.',
+};
+
+String? getRankUp(int oldXp, int newXp) {
+  final oldRank = getRank(oldXp);
+  final newRank = getRank(newXp);
+
+  if (oldRank != newRank) {
+    return newRank;
+  }
+
+  return null;
 }

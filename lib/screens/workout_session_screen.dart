@@ -112,11 +112,59 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () async {
-                  final newXp = ref.read(xpProvider.notifier).state + 10;
+                  final oldXp = ref.read(xpProvider.notifier).state;
 
+                  final newXp = oldXp + 10;
                   ref.read(xpProvider.notifier).state = newXp;
 
                   await SaveService.saveXp(newXp);
+
+                  final rankUp = getRankUp(oldXp, newXp);
+
+                  if (rankUp != null && mounted) {
+                    await showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (_) {
+                        return AlertDialog(
+                          title: const Text('⚔️ RANK UP ⚔️'),
+
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                rankUp,
+                                style: const TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+
+                              const SizedBox(height: 12),
+
+                              Text(rankTitles[rankUp]!),
+
+                              const SizedBox(height: 12),
+
+                              Text(
+                                rankUpMessages[rankUp]!,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Continue'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
 
                   if (currentExerciseIndex <
                       widget.block.exercises.length - 1) {
