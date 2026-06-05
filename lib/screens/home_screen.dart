@@ -17,6 +17,8 @@ import 'analysis_screen.dart';
 
 import 'achievement_screen.dart';
 
+import 'daily_quest_screen.dart';
+
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -35,6 +37,16 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('System Awakening'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.assignment),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const DailyQuestScreen()),
+              );
+            },
+          ),
+
           IconButton(
             icon: const Icon(Icons.emoji_events),
             onPressed: () {

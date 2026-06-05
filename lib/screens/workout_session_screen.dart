@@ -207,6 +207,16 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
 
                     await StatsService.addWorkout();
 
+                    await showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        title: const Text('🏆 ACHIEVEMENT UNLOCKED'),
+                        content: const Text(
+                          'First Steps\nComplete your first workout',
+                        ),
+                      ),
+                    );
+
                     ref.invalidate(streakProvider);
 
                     ScaffoldMessenger.of(context).showSnackBar(
