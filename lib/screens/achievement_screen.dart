@@ -36,24 +36,98 @@ class AchievementScreen extends ConsumerWidget {
                     streak: streak,
                     rank: rank,
                   );
+                  final unlockedCount = achievements
+                      .where((a) => a.unlocked)
+                      .length;
 
-                  return ListView.builder(
-                    itemCount: achievements.length,
-                    itemBuilder: (context, index) {
-                      final achievement = achievements[index];
+                  final completion = unlockedCount / achievements.length;
 
-                      return Card(
-                        child: ListTile(
-                          leading: Icon(
-                            achievement.unlocked
-                                ? Icons.emoji_events
-                                : Icons.lock,
+                  return ListView(
+                    children: [
+                      Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            children: [
+                              const Text(
+                                '🏆 ACHIEVEMENTS',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+
+                              const SizedBox(height: 12),
+
+                              Text(
+                                'Unlocked: $unlockedCount / ${achievements.length}',
+                              ),
+
+                              const SizedBox(height: 12),
+
+                              LinearProgressIndicator(value: completion),
+
+                              const SizedBox(height: 8),
+
+                              Text('${(completion * 100).toInt()}%'),
+                            ],
                           ),
-                          title: Text(achievement.title),
-                          subtitle: Text(achievement.description),
                         ),
-                      );
-                    },
+                      ),
+
+                      ...achievements.map((achievement) {
+                        return Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      achievement.unlocked
+                                          ? Icons.emoji_events
+                                          : Icons.lock,
+                                      size: achievement.unlocked ? 32 : 24,
+                                    ),
+
+                                    const SizedBox(width: 10),
+
+                                    const SizedBox(width: 10),
+
+                                    Expanded(
+                                      child: Text(
+                                        achievement.title,
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                const SizedBox(height: 8),
+
+                                Text(achievement.description),
+
+                                const SizedBox(height: 12),
+
+                                LinearProgressIndicator(
+                                  value: achievement.progress,
+                                ),
+
+                                const SizedBox(height: 6),
+
+                                Text(
+                                  '${achievement.current > achievement.target ? achievement.target : achievement.current}/${achievement.target}',
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ],
                   );
                 },
                 loading: () => const CircularProgressIndicator(),
