@@ -15,11 +15,15 @@ import 'profile_screen.dart';
 
 import 'analysis_screen.dart';
 
+import 'achievement_screen.dart';
+
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(xpLoaderProvider);
+
     final selectedDay = ref.watch(selectedDayProvider);
     final xp = ref.watch(xpProvider);
     final streakAsync = ref.watch(streakProvider);
@@ -31,6 +35,16 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('System Awakening'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.emoji_events),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const AchievementScreen()),
+              );
+            },
+          ),
+
           IconButton(
             icon: const Icon(Icons.person),
             onPressed: () {

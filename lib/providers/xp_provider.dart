@@ -1,7 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../services/save_service.dart';
+
 final xpProvider = StateProvider<int>((ref) {
   return 0;
+});
+
+final xpLoaderProvider = FutureProvider<void>((ref) async {
+  final xp = await SaveService.loadXp();
+
+  ref.read(xpProvider.notifier).state = xp;
 });
 
 const rankThresholds = {
