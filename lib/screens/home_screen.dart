@@ -13,6 +13,8 @@ import '../providers/streak_provider.dart';
 
 import 'profile_screen.dart';
 
+import 'analysis_screen.dart';
+
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -86,56 +88,73 @@ class HomeScreen extends ConsumerWidget {
                   const SizedBox(height: 12),
 
                   Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        children: [
-                          Text(
-                            'RANK: $rank',
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                    child: InkWell(
+                      onTap: () {
+                        if (analysisUnlocked(xp)) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const AnalysisScreen(),
                             ),
-                          ),
-
-                          const SizedBox(height: 8),
-
-                          Text(title, style: const TextStyle(fontSize: 18)),
-
-                          const SizedBox(height: 12),
-
-                          Text('XP: $xp', style: const TextStyle(fontSize: 16)),
-
-                          const SizedBox(height: 12),
-
-                          if (analysisUnlocked(xp)) ...[
+                          );
+                        }
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          children: [
                             Text(
-                              'Next Rank XP: ${getNextRankXp(xp)}',
-                              style: const TextStyle(fontSize: 14),
+                              'RANK: $rank',
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
 
                             const SizedBox(height: 8),
 
-                            LinearProgressIndicator(value: getRankProgress(xp)),
-                          ] else ...[
-                            const Text(
-                              '⚙ SYSTEM ANALYSIS INCOMPLETE',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
+                            Text(title, style: const TextStyle(fontSize: 18)),
 
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 12),
 
                             Text(
-                              getRank(xp) == 'S' ||
-                                      getRank(xp) == 'S+' ||
-                                      getRank(xp) == 'SS' ||
-                                      getRank(xp) == 'SS+'
-                                  ? 'Reach 90% progress to unlock rank analysis.'
-                                  : 'Reach 50% progress to unlock rank analysis.',
-                              textAlign: TextAlign.center,
+                              'XP: $xp',
+                              style: const TextStyle(fontSize: 16),
                             ),
+
+                            const SizedBox(height: 12),
+
+                            if (analysisUnlocked(xp)) ...[
+                              Text(
+                                'Next Rank XP: ${getNextRankXp(xp)}',
+                                style: const TextStyle(fontSize: 14),
+                              ),
+
+                              const SizedBox(height: 8),
+
+                              LinearProgressIndicator(
+                                value: getRankProgress(xp),
+                              ),
+                            ] else ...[
+                              const Text(
+                                '⚙ SYSTEM ANALYSIS INCOMPLETE',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+
+                              const SizedBox(height: 8),
+
+                              Text(
+                                getRank(xp) == 'S' ||
+                                        getRank(xp) == 'S+' ||
+                                        getRank(xp) == 'SS' ||
+                                        getRank(xp) == 'SS+'
+                                    ? 'Reach 90% progress to unlock rank analysis.'
+                                    : 'Reach 50% progress to unlock rank analysis.',
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ],
-                        ],
+                        ),
                       ),
                     ),
                   ),
