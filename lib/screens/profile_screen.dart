@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/xp_provider.dart';
 import '../providers/streak_provider.dart';
 
+import '../providers/stats_provider.dart';
+
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
@@ -13,6 +15,10 @@ class ProfileScreen extends ConsumerWidget {
     final rank = getRank(xp);
     final title = getTitle(xp);
     final streakAsync = ref.watch(streakProvider);
+
+    final workoutsAsync = ref.watch(workoutsCompletedProvider);
+
+    final exercisesAsync = ref.watch(exercisesCompletedProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('⚔️ Hunter Profile')),
@@ -73,6 +79,32 @@ class ProfileScreen extends ConsumerWidget {
               ),
               loading: () => const CircularProgressIndicator(),
               error: (_, __) => const Text('Error loading streak'),
+            ),
+
+            const SizedBox(height: 20),
+
+            workoutsAsync.when(
+              data: (workouts) => Card(
+                child: ListTile(
+                  leading: const Icon(Icons.fitness_center),
+                  title: const Text('Workouts Completed'),
+                  trailing: Text('$workouts'),
+                ),
+              ),
+              loading: () => const SizedBox(),
+              error: (_, __) => const SizedBox(),
+            ),
+
+            exercisesAsync.when(
+              data: (exercises) => Card(
+                child: ListTile(
+                  leading: const Icon(Icons.sports_gymnastics),
+                  title: const Text('Exercises Completed'),
+                  trailing: Text('$exercises'),
+                ),
+              ),
+              loading: () => const SizedBox(),
+              error: (_, __) => const SizedBox(),
             ),
           ],
         ),

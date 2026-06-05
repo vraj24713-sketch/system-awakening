@@ -12,6 +12,8 @@ import '../services/save_service.dart';
 import '../services/streak_service.dart';
 import '../providers/streak_provider.dart';
 
+import '../services/stats_service.dart';
+
 class WorkoutSessionScreen extends ConsumerStatefulWidget {
   final List<WorkoutBlock> blocks;
 
@@ -124,6 +126,8 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
 
                   await SaveService.saveXp(newXp);
 
+                  await StatsService.addExercise();
+
                   final rankUp = getRankUp(oldXp, newXp);
 
                   if (rankUp != null && mounted) {
@@ -200,6 +204,9 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
                     );
                   } else {
                     await StreakService.updateStreak();
+
+                    await StatsService.addWorkout();
+
                     ref.invalidate(streakProvider);
 
                     ScaffoldMessenger.of(context).showSnackBar(
