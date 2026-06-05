@@ -23,12 +23,7 @@ class DailyQuestScreen extends ConsumerWidget {
         data: (workouts) {
           return exercisesAsync.when(
             data: (exercises) {
-              final quests = DailyQuestService.getQuests(
-                workouts: workouts,
-                exercises: exercises,
-              );
-
-              final completed = quests.where((q) => q.completed).length;
+              final mission = DailyQuestService.getTodayMission();
 
               return Padding(
                 padding: const EdgeInsets.all(16),
@@ -41,9 +36,9 @@ class DailyQuestScreen extends ConsumerWidget {
 
                         child: Column(
                           children: [
-                            const Text(
-                              '📋 DAILY QUESTS',
-                              style: TextStyle(
+                            Text(
+                              mission.title,
+                              style: const TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -51,11 +46,8 @@ class DailyQuestScreen extends ConsumerWidget {
 
                             const SizedBox(height: 10),
 
-                            Text('$completed / ${quests.length} Completed'),
-                            const SizedBox(height: 10),
-
-                            const Text(
-                              '🎁 Reward: +50 XP',
+                            Text(
+                              '🎁 Reward: +${mission.rewardXp} XP',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ],
@@ -65,47 +57,40 @@ class DailyQuestScreen extends ConsumerWidget {
                     const SizedBox(height: 12),
 
                     ElevatedButton(
-                      onPressed: completed == quests.length
-                          ? () async {
-                              final oldXp = ref.read(xpProvider.notifier).state;
+                      onPressed: () async {
+                        final oldXp = ref.read(xpProvider.notifier).state;
 
-                              final newXp = oldXp + 50;
+                        final newXp = oldXp + mission.rewardXp;
 
-                              ref.read(xpProvider.notifier).state = newXp;
+                        ref.read(xpProvider.notifier).state = newXp;
 
-                              await SaveService.saveXp(newXp);
+                        await SaveService.saveXp(newXp);
 
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('🎁 +50 XP Reward Claimed!'),
-                                ),
-                              );
-                            }
-                          : null,
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              '🎁 +${mission.rewardXp} XP Reward Claimed!',
+                            ),
+                          ),
+                        );
+                      },
                       child: const Text('Claim Reward'),
                     ),
 
                     const SizedBox(height: 20),
 
                     Expanded(
-                      child: ListView.builder(
-                        itemCount: quests.length,
-
-                        itemBuilder: (context, index) {
-                          final quest = quests[index];
-
-                          return Card(
-                            child: ListTile(
-                              leading: Icon(
-                                quest.completed
-                                    ? Icons.check_circle
-                                    : Icons.circle_outlined,
+                      child: ListView(
+                        children: mission.tasks
+                            .map(
+                              (task) => Card(
+                                child: ListTile(
+                                  leading: const Icon(Icons.assignment),
+                                  title: Text(task),
+                                ),
                               ),
-
-                              title: Text(quest.title),
-                            ),
-                          );
-                        },
+                            )
+                            .toList(),
                       ),
                     ),
                   ],
