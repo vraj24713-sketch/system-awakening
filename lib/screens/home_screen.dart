@@ -11,6 +11,8 @@ import '../providers/xp_provider.dart';
 
 import '../providers/streak_provider.dart';
 
+import 'profile_screen.dart';
+
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -24,7 +26,20 @@ class HomeScreen extends ConsumerWidget {
     final workoutAsync = ref.watch(workoutPlanProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('System Awakening')),
+      appBar: AppBar(
+        title: const Text('System Awakening'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ProfileScreen()),
+              );
+            },
+          ),
+        ],
+      ),
       body: workoutAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
 
