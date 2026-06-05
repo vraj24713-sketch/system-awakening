@@ -2,9 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'screens/home_screen.dart';
+import 'providers/xp_provider.dart';
+import 'services/save_service.dart';
 
-void main() {
-  runApp(const ProviderScope(child: MyApp()));
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final savedXp = await SaveService.loadXp();
+
+  runApp(
+    ProviderScope(
+      overrides: [xpProvider.overrideWith((ref) => savedXp)],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -9,6 +9,8 @@ import 'workout_session_screen.dart';
 
 import '../providers/xp_provider.dart';
 
+import '../providers/streak_provider.dart';
+
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -16,6 +18,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedDay = ref.watch(selectedDayProvider);
     final xp = ref.watch(xpProvider);
+    final streakAsync = ref.watch(streakProvider);
     final rank = getRank(xp);
     final title = getTitle(xp);
     final workoutAsync = ref.watch(workoutPlanProvider);
@@ -35,6 +38,38 @@ class HomeScreen extends ConsumerWidget {
               padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
+                  streakAsync.when(
+                    data: (streak) => Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          children: [
+                            const Text(
+                              '🔥 DAILY STREAK',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+
+                            const SizedBox(height: 8),
+
+                            Text(
+                              streak == 1 ? '1 Day' : '$streak Days',
+                              style: const TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    loading: () => const SizedBox(),
+
+                    error: (error, stackTrace) => const SizedBox(),
+                  ),
+
+                  const SizedBox(height: 12),
+
                   Card(
                     child: Padding(
                       padding: const EdgeInsets.all(16),
@@ -186,9 +221,8 @@ class HomeScreen extends ConsumerWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => WorkoutSessionScreen(
-                              block: dayData.blocks.first,
-                            ),
+                            builder: (_) =>
+                                WorkoutSessionScreen(blocks: dayData.blocks),
                           ),
                         );
                       },

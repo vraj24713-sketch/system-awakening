@@ -9,10 +9,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/xp_provider.dart';
 import '../services/save_service.dart';
 
-class WorkoutSessionScreen extends ConsumerStatefulWidget {
-  final WorkoutBlock block;
+import '../services/streak_service.dart';
+import '../providers/streak_provider.dart';
 
-  const WorkoutSessionScreen({super.key, required this.block});
+class WorkoutSessionScreen extends ConsumerStatefulWidget {
+  final List<WorkoutBlock> blocks;
+
+  const WorkoutSessionScreen({super.key, required this.blocks});
 
   @override
   ConsumerState<WorkoutSessionScreen> createState() =>
@@ -20,6 +23,7 @@ class WorkoutSessionScreen extends ConsumerStatefulWidget {
 }
 
 class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
+  int currentBlockIndex = 0;
   int currentExerciseIndex = 0;
 
   final messages = [
@@ -81,23 +85,24 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final exercise = widget.block.exercises[currentExerciseIndex];
+    final currentBlock = widget.blocks[currentBlockIndex];
+
+    final exercise = currentBlock.exercises[currentExerciseIndex];
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.block.name)),
+      appBar: AppBar(title: Text(currentBlock.name)),
 
       body: Padding(
         padding: const EdgeInsets.all(24),
 
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-
           children: [
             Text(
-              'Exercise ${currentExerciseIndex + 1} / ${widget.block.exercises.length}',
+              'Block ${currentBlockIndex + 1}/${widget.blocks.length}\n'
+              'Exercise ${currentExerciseIndex + 1}/${currentBlock.exercises.length}',
               style: const TextStyle(fontSize: 18),
             ),
-
             const SizedBox(height: 20),
 
             Text(
@@ -167,7 +172,7 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
                   }
 
                   if (currentExerciseIndex <
-                      widget.block.exercises.length - 1) {
+                      currentBlock.exercises.length - 1) {
                     setState(() {
                       currentExerciseIndex++;
                     });
@@ -177,13 +182,29 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('+10 XP\n$message'),
-                        duration: const Duration(seconds: 4),
+                        duration: const Duration(seconds: 1),
+                      ),
+                    );
+                  } else if (currentBlockIndex < widget.blocks.length - 1) {
+                    setState(() {
+                      currentBlockIndex++;
+                      currentExerciseIndex = 0;
+                    });
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          '⚔️ ${widget.blocks[currentBlockIndex].name} Started',
+                        ),
                       ),
                     );
                   } else {
+                    await StreakService.updateStreak();
+                    ref.invalidate(streakProvider);
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('🔥 Workout Complete! +10 XP'),
+                        content: Text('🔥 Full Workout Complete!'),
                       ),
                     );
 
