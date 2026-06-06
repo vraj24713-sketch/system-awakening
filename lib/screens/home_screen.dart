@@ -19,6 +19,11 @@ import 'achievement_screen.dart';
 
 import 'daily_quest_screen.dart';
 
+import 'create_workout_screen.dart';
+
+import '../models/custom_workout.dart';
+import '../services/custom_workout_service.dart';
+
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -37,6 +42,16 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('System Awakening'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const CreateWorkoutScreen()),
+              );
+            },
+          ),
+
           IconButton(
             icon: const Icon(Icons.assignment),
             onPressed: () {
@@ -109,6 +124,59 @@ class HomeScreen extends ConsumerWidget {
                     loading: () => const SizedBox(),
 
                     error: (error, stackTrace) => const SizedBox(),
+                  ),
+
+                  FutureBuilder<List<CustomWorkout>>(
+                    future: CustomWorkoutService.getWorkouts(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return const SizedBox();
+                      }
+
+                      final workouts = snapshot.data!;
+
+                      if (workouts.isEmpty) {
+                        return const SizedBox();
+                      }
+
+                      return Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+
+                            children: [
+                              const Text(
+                                '⚔ CUSTOM WORKOUTS',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+
+                              const SizedBox(height: 12),
+
+                              ...workouts.map(
+                                (workout) => ListTile(
+                                  onTap: () {
+                                    // launch custom workout
+                                  },
+
+                                  leading: const Icon(Icons.fitness_center),
+
+                                  title: Text(workout.name),
+
+                                  subtitle: Text(
+                                    '${workout.blocks.length} Blocks',
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   ),
 
                   const SizedBox(height: 12),
