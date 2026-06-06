@@ -24,6 +24,8 @@ import 'create_workout_screen.dart';
 import '../models/custom_workout.dart';
 import '../services/custom_workout_service.dart';
 
+import '../models/workout_plan.dart';
+
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -160,10 +162,53 @@ class HomeScreen extends ConsumerWidget {
                               ...workouts.map(
                                 (workout) => ListTile(
                                   onTap: () {
-                                    // launch custom workout
+                                    final blocks = workout.blocks
+                                        .map(
+                                          (block) => WorkoutBlock(
+                                            name: block.name,
+                                            durationSeconds: 0,
+                                            type: 'custom',
+                                            exercises: block.exercises
+                                                .map(
+                                                  (exercise) => Exercise(
+                                                    type: 'custom',
+                                                    name: exercise,
+                                                  ),
+                                                )
+                                                .toList(),
+                                          ),
+                                        )
+                                        .toList();
+
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => WorkoutSessionScreen(
+                                          blocks: blocks,
+                                        ),
+                                      ),
+                                    );
                                   },
 
                                   leading: const Icon(Icons.fitness_center),
+
+                                  trailing: IconButton(
+                                    icon: const Icon(Icons.delete),
+                                    onPressed: () async {
+                                      await CustomWorkoutService.deleteWorkout(
+                                        workout.name,
+                                      );
+
+                                      if (context.mounted) {
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => const HomeScreen(),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
 
                                   title: Text(workout.name),
 
